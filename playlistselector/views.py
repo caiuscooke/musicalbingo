@@ -10,6 +10,7 @@ from rest_framework.viewsets import GenericViewSet
 
 from .models import *
 from .serializers import *
+from musicalbingo.settings import CLIENT_ID, CLIENT_SECRET
 
 
 # class PlaylistViewSet(CreateModelMixin, ListModelMixin, GenericViewSet):
@@ -34,8 +35,8 @@ from .serializers import *
 
 class AccessTokenViewSet(APIView):
     # Set up your Spotify API credentials
-    client_id = '53ee2e6b07c247b5bee73008cb912c35'
-    client_secret = '0dedf33cc1c6455aa836c85f31f3ee2a'
+    client_id = CLIENT_ID
+    client_secret = CLIENT_SECRET
     # Set up the endpoint URL
     endpoint_url = 'https://accounts.spotify.com/api/token'
 
