@@ -1,0 +1,13 @@
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore SQLite database
+*.sqlite3
+
+# Ignore environment file
+.env
+
+# Ignore editor-specific files
+.vscode/

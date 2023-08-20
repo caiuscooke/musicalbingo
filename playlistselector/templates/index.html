@@ -1,15 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/app.css" />
+    <link rel="stylesheet" href="{% static '/css/app.css' %}" />
     <title>Musical Bingo Generator</title>
   </head>
   <body>
-    Hello World
     <input type="text" id="submitURL" />
-    <button type="button" onclick="getURL()">Click to Submit</button>
+    <button type="button" onclick="onClick()">Click to Submit</button>
     <iframe
       id="displayPlaylist"
       style="border-radius: 12px"
@@ -20,7 +20,7 @@
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy"
     ></iframe>
-    <script>
+    <script src="">
       function getURL() {
         let url = document.getElementById("submitURL").value;
         let comInd = url.indexOf(".com");
