@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musical Bingo Card Generator</title>
+    <link rel="stylesheet" href="{% static 'playlistselector/styles.css' %}" />
+  </head>
+  <body>
+    <div class="home-page">
+      <h1>Welcome!</h1>
+      <p>
+        This website was made to generate musical bingo cards for your event.
+        Simply copy the link for a spotify playlist and let us do the rest!
+      </p>
+      <form method="post" action="{% url 'playlist' %}">
+        {% csrf_token %}
+        <label for="url">Enter URL:</label>
+        <input type="text" name="playlist_url" id="url" />
+        <button type="submit">Submit</button>
+        <p>{{ status }}</p>
+        <iframe
+          style="border-radius: 12px"
+          src="{{ uri }}"
+          width="90%"
+          height="352"
+          frameborder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+      </form>
+    </div>
+  </body>
+</html>

@@ -21,6 +21,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
-    path('musicalbingo/', include('playlistselector.urls')),
+    path('', include('playlistselector.urls')),
     path('home/', include('rest_framework.urls'))
 ]

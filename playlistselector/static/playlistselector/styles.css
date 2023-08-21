@@ -1,0 +1,19 @@
+html {
+  background-color: darkcyan;
+}
+.home-page {
+  text-align: center;
+}
+.home-page h1 {
+  margin: 50px 20px;
+  font-size: 400%;
+}
+.home-page p {
+  padding: 50px 80px;
+  font-size: 2rem;
+}
+@media (max-width: 768px) {
+  .home-page p {
+    font-size: 1rem;
+  }
+}
