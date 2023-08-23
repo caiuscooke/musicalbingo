@@ -8,10 +8,11 @@ from rest_framework.routers import DefaultRouter
 
 # URL Config
 urlpatterns = [
-    path("", TemplateView.as_view(template_name='playlistselector/index.html')),
-    path("token/", views.AccessTokenViewSet.as_view()),
+    path("", views.home, name='home'),
+    path("get-access-token/", views.AccessTokenViewSet.as_view(),
+         name='get_access_token'),
     path("playlist/", views.PlaylistDisplay.as_view(), name='playlist'),
+    path("playlist/<int:id>/get-full-info/",
+         views.PlaylistResponseViewSet.as_view(), name='get_info'),
     path("playlist/<int:id>/", views.PlaylistDetail.as_view()),
-    path("playlist/<int:id>/get-full-info",
-         views.PlaylistResponseViewSet.as_view())
 ]

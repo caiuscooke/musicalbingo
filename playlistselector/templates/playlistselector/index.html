@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% load custom_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,6 +8,28 @@
     <link rel="stylesheet" href="{% static 'playlistselector/styles.css' %}" />
   </head>
   <body>
+    <div class="top-nav">
+      <a href="{% url 'playlist' %}">Click to see uploaded playlists</a>
+    </div>
+    <!-- prettier-ignore -->
+    {% with expires_at=request.session.a_t_expires_at %}
+    {% if not request.session.spotify_access_token or expires_at|has_expired %}
+    <p>Condition is True</p>
+    <script>
+      var access_token_url = "{% url 'get_access_token' %}";
+      fetch(access_token_url)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Access token retrieved:", data);
+        })
+        .catch((error) =>
+          console.error("Error retrieving access token:", error)
+        );
+    </script>
+    <!-- prettier-ignore -->
+    {% endif %} 
+    {% endwith %}
+    {{ request.session.a_t_expires_at }}
     <div class="home-page">
       <h1>Welcome!</h1>
       <p>
@@ -19,7 +41,9 @@
         <label for="url">Enter URL:</label>
         <input type="text" name="playlist_url" id="url" />
         <button type="submit">Submit</button>
+        {% if status %}
         <p>{{ status }}</p>
+        {% endif %} {% if uri %}
         <iframe
           style="border-radius: 12px"
           src="{{ uri }}"
@@ -30,6 +54,20 @@
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
         ></iframe>
+        {% endif %} {% if id %}
+        <br />
+        <a class="link" href="{% url 'get_info' id=id %}"
+          >Click to get the names of the playlist tracks</a
+        >
+        {% endif %} {% if track_names %}
+        <div class="generator">
+          <ul class="generator-row">
+            {% for track_name in track_names %}
+            <li>{{ track_name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
       </form>
     </div>
   </body>
