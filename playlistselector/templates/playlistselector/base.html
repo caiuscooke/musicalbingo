@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musical Bingo Card Generator</title>
+    <link rel="stylesheet" href="{% static 'playlistselector/styles.css' %}" />
+  </head>
+  <body>
+    <header>
+      <nav class="top-nav">
+        <ul class="nav-list">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'playlist' %}">All Playlists</a></li>
+          <li><a href="#">Contact</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="#">Welcome {{ user.username }}</a></li>
+          {% else %}
+          <li><a href="#">Log in</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    <main class="wrapper">{% block content %}{% endblock %}</main>
+    <footer>
+      <p>Caius Cooke</p>
+    </footer>
+  </body>
+</html>

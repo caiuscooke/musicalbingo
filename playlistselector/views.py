@@ -2,35 +2,92 @@ import json
 from datetime import datetime, timedelta
 
 import requests
+from django.contrib.auth.models import User
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.views import View
 from rest_framework import status
-from rest_framework.generics import (GenericAPIView, ListCreateAPIView,
-                                     RetrieveUpdateDestroyAPIView)
-from rest_framework.mixins import CreateModelMixin, DestroyModelMixin
-from rest_framework.response import Response
-from rest_framework.views import APIView, View
-from rest_framework.viewsets import GenericViewSet
+
 
 from musicalbingo.settings import CLIENT_ID, CLIENT_SECRET
 
+from .forms import *
 from .models import *
 from .serializers import *
 
 
 def home(request):
+    form = PlaylistForm(request.POST)
     status = request.session.pop('status', None)
-    uri = request.session.pop('uri', None)
+    embed_url = request.session.pop('embed_url', None)
     id = request.session.pop('id', None)
     track_names = request.session.pop('track_names', None)
     context = {
         'status': status,
-        'uri': uri,
+        'embed_url': embed_url,
         'track_names': track_names,
-        'id': id
+        'id': id,
+        'forms': form
     }
-    return render(request, 'playlistselector/index.html', context)
+    return render(request, 'playlistselector/home.html', context)
+
+
+class PlaylistCreate(View):
+
+    def get_playlist_uri(self, playlist_url):
+        start_ind = playlist_url.index('playlist/') + len('playlist/')
+        end_ind = playlist_url.index('?')
+        playlist_uri = playlist_url[start_ind:end_ind]
+        return playlist_uri
+
+    def get(self, request, *args, **kwargs):
+        queryset = Playlist.objects.all()
+        playlist_data = []
+        for playlist in queryset:
+            playlist_uri = playlist.playlist_uri
+            embed_url = f'https://open.spotify.com/embed/playlist/{playlist_uri}?utm_source=generator'
+            playlist_data.append((embed_url, playlist.id))
+
+        template_name = 'playlistselector/playlists.html'
+        context = {
+            'playlist_data': playlist_data
+        }
+
+        return render(request, template_name, context=context)
+
+    def fill_session_data(self, request: requests.request, playlist: Playlist, playlist_uri: str, status: str):
+        request.session['id'] = playlist.id
+        request.session[
+            'embed_url'] = f'https://open.spotify.com/embed/playlist/{playlist_uri}?utm_source=generator'
+        request.session['status'] = status
+
+    def post(self, request, *args, **kwargs):
+        form = PlaylistForm(request.POST)
+
+        if form.is_valid():
+            playlist_url = form.cleaned_data['playlist_url']
+            playlist_uri = self.get_playlist_uri(playlist_url)
+            playlist = Playlist.objects.filter(
+                playlist_uri=playlist_uri).first()
+
+            if playlist:
+                status = 'Another user has already uploaded that playlist.'
+                self.fill_session_data(
+                    request, playlist, playlist_uri, status)
+                return redirect('home')
+            elif len(playlist_uri) == 22:
+                playlist = Playlist.objects.create(
+                    playlist_url=playlist_url, playlist_uri=playlist_uri)
+                status = 'Thank you for submitting your playlist!'
+                self.fill_session_data(
+                    request, playlist, playlist_uri, status)
+                return redirect('home')
+            else:
+                request.session['status'] = 'That was not a valid URL'
+                return redirect('home')
+        else:
+            request.session['status'] = 'That was not a valid URL'
+            return redirect('home')
 
 
 class AccessTokenViewSet(View):
@@ -89,9 +146,9 @@ class AccessTokenViewSet(View):
 class PlaylistResponseViewSet(View):
 
     def get(self, request, id):
-        queryset = Playlist.objects.filter(id=id).first()
-        uri = queryset.playlist_uri
+        playlist = Playlist.objects.filter(id=id).first()
 
+        uri = playlist.playlist_uri
         endpoint_url = f'https://api.spotify.com/v1/playlists/{uri}'
         access_token = request.session['spotify_access_token']
         token_type = request.session['token_type']
@@ -100,14 +157,24 @@ class PlaylistResponseViewSet(View):
             'Authorization': f'{token_type} {access_token}'
         }
         response = json.loads(requests.get(endpoint_url, headers=headers).text)
+
+        if response.get('error'):
+            context_data = {
+                'error': 'That was not a valid playlist. Playlists that were made for you by Spotify (such as Spotify Wrapped) are not allowed.',
+                'playlist_id': playlist.id
+            }
+            return render(request, template_name='playlistselector/cardgenerator.html', context=context_data)
+
         response_data = response.get('tracks')['items']
+
         next = response.get('tracks')['next']
-        entry = 1
+
         while next:
             response = json.loads(requests.get(
                 next, headers=headers).text)
-            entry += 1
+
             response_data.append(response['items'])
+
             if response.get('next'):
                 next = response.get('next')
             else:
@@ -139,60 +206,70 @@ class PlaylistResponseViewSet(View):
         return render(request, template_name='playlistselector/cardgenerator.html', context=context_data)
 
 
-class PlaylistDetail(RetrieveUpdateDestroyAPIView):
-    queryset = Playlist.objects.all()
-    serializer_class = PlaylistSerializer
-    lookup_field = 'id'
-
-
-class PlaylistDisplay(ListCreateAPIView):
-    queryset = Playlist.objects.all()
-    serializer_class = PlaylistSerializer
-
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        playlist_data = []
-        for playlist in queryset:
-            playlist_url = playlist.playlist_url
-            start_ind = playlist_url.index('playlist/') + len('playlist/')
-            end_ind = playlist_url.index('?')
-            playlist_uri = playlist_url[start_ind:end_ind]
-            embed_url = f'https://open.spotify.com/embed/playlist/{playlist_uri}?utm_source=generator'
-            playlist_data.append((embed_url, playlist.id))
-
-        context = {
-            'playlist_data': playlist_data
+class PlaylistDelete(View):
+    def delete(self, request, id):
+        playlist = Playlist.objects.filter(id=id).first()
+        playlist.delete()
+        context_data = {
+            'delete_status': 'That playlist was successfully deleted.',
+            'playlist_info': playlist
         }
+        return render(request, 'playlistselector/cardgenerator.html', context=context_data, status=status.HTTP_200_OK)
 
-        return render(request, 'playlistselector/playlists.html', context=context)
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        playlist_url = request.POST.get('playlist_url')
+# class PlaylistDisplay(ListCreateAPIView):
+    # queryset = Playlist.objects.all()
+    # serializer_class = PlaylistSerializer
 
-        if serializer.is_valid():
-            start_ind = playlist_url.index('playlist/') + len('playlist/')
-            end_ind = playlist_url.index('?')
-            playlist_uri = playlist_url[start_ind:end_ind]
-            exists = Playlist.objects.filter(
-                playlist_uri=playlist_uri).exists()
+    # def get_playlist_uri(self, playlist_url):
+    #     start_ind = playlist_url.index('playlist/') + len('playlist/')
+    #     end_ind = playlist_url.index('?')
+    #     playlist_uri = playlist_url[start_ind:end_ind]
+    #     return playlist_uri
 
-            if not exists:
-                playlist = Playlist.objects.create(playlist_url=playlist_url,
-                                                   playlist_uri=playlist_uri)
-                playlist_id = playlist.id
-                request.session['id'] = playlist_id
-                request.session[
-                    'playlist_embed'] = f'https://open.spotify.com/embed/playlist/{playlist_uri}?utm_source=generator'
-                return redirect('home')
-            else:
-                playlist = Playlist.objects.get(playlist_uri=playlist_uri)
-                playlist_id = playlist.id
-                request.session['id'] = playlist_id
-                request.session[
-                    'uri'] = f'https://open.spotify.com/embed/playlist/{playlist_uri}?utm_source=generator'
-                request.session['status'] = 'It seems like that playlist has already been uploaded by a user!'
-                return redirect('home')
-        else:
-            request.session['status'] = f"That wasn't a valid URL, please try again."
-            return redirect('home')
+    # def list(self, request, *args, **kwargs):
+    #     queryset = self.get_queryset()
+    #     playlist_data = []
+    #     for playlist in queryset:
+    #         playlist_uri = playlist.playlist_uri
+    #         embed_url = f'https://open.spotify.com/embed/playlist/{playlist_uri}?utm_source=generator'
+    #         playlist_data.append((embed_url, playlist.id))
+
+    #     context = {
+    #         'playlist_data': playlist_data
+    #     }
+
+    #     return render(request, 'playlistselector/playlists.html', context=context)
+
+    # def create(self, request, *args, **kwargs):
+    #     serializer = self.get_serializer(data=request.data)
+    #     is_valid = serializer.is_valid()
+
+    #     try:
+    #         error = serializer.errors['playlist_url'][0]
+    #     except:
+    #         print('no error')
+
+    #     if is_valid or 'playlist with this playlist url already exists' in error:
+    #         playlist_url = request.POST.get('playlist_url')
+    #         playlist_uri = self.get_playlist_uri(playlist_url)
+    #         playlist = Playlist.objects.filter(
+    #             playlist_uri=playlist_uri).first()
+
+    #         if playlist:
+    #             request.session['id'] = playlist.id
+    #             request.session[
+    #                 'embed_url'] = f'https://open.spotify.com/embed/playlist/{playlist_uri}?utm_source=generator'
+    #             request.session['status'] = 'Another user has already submitted that playlist.'
+    #             return redirect('home')
+    #         else:
+    #             playlist = Playlist.objects.create(
+    #                 playlist_url=playlist_url, playlist_uri=playlist_uri)
+    #             request.session['id'] = playlist.id
+    #             request.session[
+    #                 'embed_url'] = f'https://open.spotify.com/embed/playlist/{playlist_uri}?utm_source=generator'
+    #             request.session['status'] = 'Thank you for submitting your playlist!'
+    #             return redirect('home')
+    #     else:
+    #         request.session['status'] = f'{error}'
+    #         return redirect('home')

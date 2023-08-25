@@ -1,22 +1,31 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Musical Bingo Card Generator</title>
-    <link rel="stylesheet" href="{% static 'playlistselector/styles.css' %}" />
-  </head>
-  <body>
-    <div class="top-nav">
-      <a href="{% url 'home' %}">Click to go home</a>
-    </div>
-    {% if track_names %}
-    <ul class="generator-row">
-      {% for name in track_names %}
-      <li>{{ name }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-  </body>
-</html>
+{% extends 'playlistselector/base.html' %}
+<!-- prettier-ignore -->
+{% block content %} 
+{% if track_names %}
+<div class="generator">
+  <ul class="generator-row">
+    {% for name in track_names %}
+    <li>{{ name }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% elif 'not allowed' in error %}
+<p>{{ error }}</p>
+{% url 'home' as home_url %}
+<button
+  class="delete-button"
+  data-id="{{ playlist_id }}"
+  onclick="handleDelete('{{ playlist_id }}', '{{ home_url }}','{{ csrf_token }}')"
+>
+  Delete Playlist
+</button>
+<!-- prettier-ignore -->
+{% endif %} 
+{% if delete_status and playlist_details %}
+<div>
+  <p>{{ delete_status }}</p>
+  <p>{{ playlist_details }}</p>
+</div>
+<!-- prettier-ignore -->
+{% endif %} 
+{% endblock content %}
