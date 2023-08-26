@@ -1,0 +1,13 @@
+{% extends 'playlistselector/base.html' %}
+<!-- prettier-ignore -->
+{% block content %}
+<div id="messages">
+  <ul class="messages">
+    <!-- prettier-ignore -->
+    {% if messages %}
+    <p>{{ messages }}</p>
+    <!-- prettier-ignore -->
+    {% endif %}
+  </ul>
+</div>
+{% endblock %}

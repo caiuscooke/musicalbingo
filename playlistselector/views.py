@@ -2,12 +2,13 @@ import json
 from datetime import datetime, timedelta
 
 import requests
-from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from rest_framework import status
-
 
 from musicalbingo.settings import CLIENT_ID, CLIENT_SECRET
 
@@ -17,7 +18,6 @@ from .serializers import *
 
 
 def home(request):
-    form = PlaylistForm(request.POST)
     status = request.session.pop('status', None)
     embed_url = request.session.pop('embed_url', None)
     id = request.session.pop('id', None)
@@ -27,9 +27,52 @@ def home(request):
         'embed_url': embed_url,
         'track_names': track_names,
         'id': id,
-        'forms': form
     }
     return render(request, 'playlistselector/home.html', context)
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user=user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+
+    context = {'form': form}
+    return render(request, 'playlistselector/login.html', context)
+
+
+def create_user(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, 'Account created successfully.')
+            user = authenticate(
+                request, username=user.username, password=request.POST['password1'])
+            if user is not None:
+                login(request, user)
+                return redirect('account_created')
+    else:
+        form = UserCreationForm()
+
+    context_data = {
+        'form': form
+    }
+    return render(request, 'playlistselector/createaccount.html', context=context_data)
+
+
+def account_created(request):
+    context = {'messages': messages.get_messages(request)}
+    return render(request, 'playlistselector/accountcreated.html', context=context, status=status.HTTP_201_CREATED)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 class PlaylistCreate(View):

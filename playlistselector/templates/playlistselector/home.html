@@ -31,30 +31,30 @@
       <input type="url" name="playlist_url" id="id_playlist_url" />
       <button type="submit">Submit</button>
     </div>
-    {% if status %}
-    <p>{{ status }}</p>
-    <!-- prettier-ignore -->
-    {% endif %} 
-    {% if embed_url %}
-    <iframe
-      style="border-radius: 12px"
-      src="{{ embed_url }}"
-      width="90%"
-      height="352"
-      frameborder="0"
-      allowfullscreen=""
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"
-    ></iframe>
-    <!-- prettier-ignore -->
-    {% endif %} 
-    {% if id %}
-    <br />
-    <a class="link" href="{% url 'get_info' id=id %}"
-      >Click to get the names of the playlist tracks</a
-    >
-    <!-- prettier-ignore -->
-    {% endif %}
   </form>
+  {% if status %}
+  <p>{{ status }}</p>
+  <!-- prettier-ignore -->
+  {% endif %} 
+  {% if embed_url %}
+  <iframe
+    style="border-radius: 12px"
+    src="{{ embed_url }}"
+    width="90%"
+    height="352"
+    frameborder="0"
+    allowfullscreen=""
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy"
+  ></iframe>
+  <!-- prettier-ignore -->
+  {% endif %} 
+  {% if id %}
+  <br />
+  <a class="link" href="{% url 'get_info' id=id %}"
+    >Click to get the names of the playlist tracks</a
+  >
+  <!-- prettier-ignore -->
+  {% endif %}
 </div>
 {% endblock %}

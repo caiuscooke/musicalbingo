@@ -39,6 +39,26 @@ footer {
   padding: 10px;
   text-align: center;
 }
+#dropdown-menu {
+  position: absolute;
+  background-color: darkslategray;
+  border: 1px solid #ccc;
+}
+
+#dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#dropdown-menu li a {
+  color: #333;
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
 
 /* Card Generator cardgenerator.html styles */
 .generator {

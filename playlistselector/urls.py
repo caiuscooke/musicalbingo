@@ -15,4 +15,8 @@ urlpatterns = [
     path("playlist/<int:id>/get-full-info/",
          views.PlaylistResponseViewSet.as_view(), name='get_info'),
     path("playlist/<int:id>/", views.PlaylistDelete.as_view()),
+    path("accounts/create", views.create_user, name='create'),
+    path("accounts/created", views.account_created, name='account_created'),
+    path("accounts/logout", views.logout_view, name='logout'),
+    path("accounts/login", views.login_view, name='login')
 ]

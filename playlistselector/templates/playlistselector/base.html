@@ -15,9 +15,17 @@
           <li><a href="{% url 'playlist' %}">All Playlists</a></li>
           <li><a href="#">Contact</a></li>
           {% if user.is_authenticated %}
-          <li><a href="#">Welcome {{ user.username }}</a></li>
+          <li>
+            <a href="#" id="dropdown-trigger">Welcome {{ user.username }}</a>
+            <div id="dropdown-menu" class="hidden">
+              <ul>
+                <li><a href="#">My Account</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+              </ul>
+            </div>
+          </li>
           {% else %}
-          <li><a href="#">Log in</a></li>
+          <li><a href="{% url 'login' %}">Log in</a></li>
           {% endif %}
         </ul>
       </nav>
@@ -26,5 +34,6 @@
     <footer>
       <p>Caius Cooke</p>
     </footer>
+    <script src="{% static 'playlistselector/app.js' %}"></script>
   </body>
 </html>
