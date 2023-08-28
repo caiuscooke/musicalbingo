@@ -2,6 +2,8 @@ html {
   background-color: darkcyan;
 }
 body {
+  font-family: "Roboto Mono", monospace;
+  font-family: "Ubuntu", sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
@@ -27,7 +29,7 @@ body {
   margin-right: 15px;
 }
 .nav-list li:last-child {
-  margin-right: 0px;
+  margin-right: 15px;
 }
 .nav-list li a {
   color: white;
@@ -52,31 +54,17 @@ footer {
 }
 
 #dropdown-menu li a {
-  color: #333;
+  color: #ccc;
+  padding: 10px;
+}
+
+#dropdown-menu li a:hover {
+  background-color: aquamarine;
   padding: 10px;
 }
 
 .hidden {
   display: none;
-}
-
-/* Card Generator cardgenerator.html styles */
-.generator {
-  display: flex;
-  justify-content: center;
-}
-.generator-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  list-style: none;
-  padding: 0;
-}
-.generator-row li {
-  flex: 1 0 auto;
-  text-align: center;
-  border: 1px solid #ccc;
-  padding: 10px;
 }
 
 /* Home home.html styles */
@@ -100,6 +88,34 @@ footer {
   text-decoration: none;
   color: black;
   padding: 10px 10px;
+}
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-container p {
+  text-align: center;
+  width: 50%;
+}
+
+/* Card Generator cardgenerator.html styles */
+.generator {
+  display: flex;
+  justify-content: center;
+}
+.generator-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+.generator-row li {
+  flex: 1 0 auto;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
 }
 
 /* playlist playlists.html styles */

@@ -5,7 +5,7 @@ import requests
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.http.response import JsonResponse
+from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from rest_framework import status
@@ -15,6 +15,7 @@ from musicalbingo.settings import CLIENT_ID, CLIENT_SECRET
 from .forms import *
 from .models import *
 from .serializers import *
+from .pdfgenerator import make_bingo_card
 
 
 def home(request):
@@ -188,65 +189,43 @@ class AccessTokenViewSet(View):
 
 class PlaylistResponseViewSet(View):
 
-    def get(self, request, id):
+    def post(self, request, id):
+        # Set up for all playlists
         playlist = Playlist.objects.filter(id=id).first()
-
+        cards = int(request.POST.get('cards'))
         uri = playlist.playlist_uri
-        endpoint_url = f'https://api.spotify.com/v1/playlists/{uri}'
+        offset = 0
+        endpoint_url = f'https://api.spotify.com/v1/playlists/{uri}/tracks?offset={offset}&limit=100'
         access_token = request.session['spotify_access_token']
         token_type = request.session['token_type']
 
         headers = {
             'Authorization': f'{token_type} {access_token}'
         }
-        response = json.loads(requests.get(endpoint_url, headers=headers).text)
+        response = requests.get(endpoint_url, headers=headers)
+        data = response.json()
+        total = data.get('total')
+        items = data.get('items')
+        track_names = [item.get('track')['name'] for item in items]
 
-        if response.get('error'):
-            context_data = {
-                'error': 'That was not a valid playlist. Playlists that were made for you by Spotify (such as Spotify Wrapped) are not allowed.',
-                'playlist_id': playlist.id
-            }
-            return render(request, template_name='playlistselector/cardgenerator.html', context=context_data)
+        offset_interval = 100
 
-        response_data = response.get('tracks')['items']
+        # skip everything if there is only one query to get
+        if total < 100:
+            make_bingo_card(track_names=track_names, unique_pages=cards)
+            return JsonResponse(data=track_names, json_dumps_params={'indent': 4}, safe=False)
+        elif total > 1000:
+            offset_interval = 200
 
-        next = response.get('tracks')['next']
+        while total - offset > 100:
+            offset += offset_interval
+            endpoint_url = f'https://api.spotify.com/v1/playlists/{uri}/tracks?offset={offset}&limit=100'
+            response = requests.get(endpoint_url, headers=headers)
+            data = response.json()
+            items = data.get('items')
+            track_names.extend(item.get('track')['name'] for item in items)
 
-        while next:
-            response = json.loads(requests.get(
-                next, headers=headers).text)
-
-            response_data.append(response['items'])
-
-            if response.get('next'):
-                next = response.get('next')
-            else:
-                break
-
-        track_names = []
-
-        for each in response_data:
-            if type(each) == dict:
-                try:
-                    track_name = each.get('track')['name']
-                    track_names.append(track_name)
-                except:
-                    pass
-            elif type(each) == list:
-                for item in each:
-                    try:
-                        track_name = item.get('track')['name']
-                        track_names.append(track_name)
-                    except:
-                        pass
-        track_total = len(track_names)
-        track_names.sort()
-        track_names.insert(0, track_total)
-
-        context_data = {
-            'track_names': track_names
-        }
-        return render(request, template_name='playlistselector/cardgenerator.html', context=context_data)
+        return make_bingo_card(track_names=track_names, unique_pages=cards)
 
 
 class PlaylistDelete(View):

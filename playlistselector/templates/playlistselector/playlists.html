@@ -7,13 +7,17 @@
   <div class="grid-item">
     <iframe
       src="{{ link }}"
-      height="100px"
       frameborder="0"
       allowfullscreen=""
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy"
     ></iframe>
-    <a href="{% url 'get_info' id=id %}">Click to get track names</a>
+    <form method="post" action="{% url 'get_info' id=id %}">
+      {% csrf_token %}
+      <label for="input_cards">How many unique cards would you like?</label>
+      <input type="text" name="cards" id="input_cards" />
+      <button type="submit">Get Pdfs</button>
+    </form>
   </div>
   {% endfor %}
 </div>
