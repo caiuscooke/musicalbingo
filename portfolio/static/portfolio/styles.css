@@ -1,0 +1,123 @@
+html {
+  background-color: whitesmoke;
+}
+body {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.wrapper {
+  flex: 1;
+}
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+.top-nav {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #333;
+  padding: 10px;
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+  border-bottom-color: #116ba8;
+}
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.nav-list li {
+  margin-right: 15px;
+}
+.nav-list li:last-child {
+  margin-right: 15px;
+}
+.nav-list li a {
+  color: whitesmoke;
+  text-decoration: none;
+}
+.home-title {
+  font-family: "Roboto Mono", monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 20px;
+  border-bottom-color: #333;
+}
+.home-title h1 {
+  font-size: 3.5rem;
+  text-align: left;
+  margin-bottom: 5px;
+  color: black;
+}
+.home-title p {
+  text-align: left;
+  font-size: 2.5rem;
+  margin: 5px 5px;
+  color: black;
+  font-weight: 900;
+}
+.home-title img {
+  width: 10%;
+  height: 10%;
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+  .home-title img {
+    width: 75%;
+    height: auto;
+  }
+  .home-title h1 {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .home-title p {
+    text-align: center;
+    font-size: 1rem;
+  }
+}
+.grid-container {
+  border-top-style: solid;
+  border-top-color: #116ba8;
+  border-width: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-item {
+  font-family: "PT Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 15px;
+  border-right: 8px solid #116ba8;
+}
+.grid-item:last-child {
+  border: none;
+}
+@media (max-width: 768px) {
+  .grid-item {
+    max-width: 50%;
+    margin-left: 5%;
+    padding: 6px; /* Add padding instead of margin for better spacing */
+  }
+}
+.grid-item p {
+  text-align: left;
+  font-size: 2.2rem;
+}
+.grid-item img {
+  display: flex;
+  justify-self: center;
+  width: 75%;
+  height: auto;
+  padding: 15px 15px;
+}

@@ -1,0 +1,39 @@
+{% extends 'portfolio/base.html' %}
+<!-- prettier-ignore -->
+{% load static %}
+{% block inner_content %}
+<div class="home-title">
+  <h1>Hi, I'm Caius</h1>
+  <p>nice to meet you</p>
+  <p>はじめまして</p>
+  <img
+    src="{% static 'portfolio/images/IMG-4825.PNG' %}"
+    alt="Caius Cooke's profile photo"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto+Mono:wght@100&family=Ubuntu:wght@300&display=swap"
+    rel="stylesheet"
+  />
+</div>
+<div class="grid-container">
+  <div class="grid-item">
+    <p>
+      I am a certified back-end developer with Python's Django, and I have
+      experience with front-end development and design. I am also an educator
+      for programming and computer science! Most of my professional experience
+      is from teaching children how to code, as well as some private tutoring
+      and lessons with all ages. I have a strong passion for coding and an
+      arguably stronger passion for learning new things. Please, feel free to
+      browse my website and get to know me a bit more!
+    </p>
+  </div>
+  <div class="grid-item">
+    <img
+      src="{% static 'portfolio/images/codewiz.jpg' %}"
+      alt="Caius Cooke at Code Wiz Durham's Grand Opening"
+    />
+  </div>
+</div>
+{% endblock inner_content %}

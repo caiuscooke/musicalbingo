@@ -5,6 +5,20 @@ from random import randint
 from io import BytesIO
 
 
+def fill_coords_list(coord_list: list, distance: int):
+    for i in range(1, 7):
+        coord_list.append(distance * i)
+
+
+def split_word_in_half(word: str) -> tuple[str, str]:
+    line_len = len(word)
+    line_middle = line_len // 2
+
+    first_half = word[:line_middle]
+    second_half = word[line_middle:]
+    return first_half, second_half
+
+
 def make_bingo_card(track_names: list, unique_pages=1):
     # get the width and height based on the standard 'letter' dimensions
     width, height = letter
@@ -20,14 +34,12 @@ def make_bingo_card(track_names: list, unique_pages=1):
     # calculate each column's (vertical line) start point on the x axis
     xpos = []
     column_width = working_width / 6
-    for i in range(1, 7):
-        xpos.append(column_width * i)
+    fill_coords_list(xpos, column_width)
 
     # calculate each row's (horizontal line) start point on the y axis
     ypos = []
     row_height = working_height / 6
-    for i in range(1, 7):
-        ypos.append(row_height * i)
+    fill_coords_list(ypos, row_height)
 
     # get the middle of the first row and first column
     row_middle = row_height / 2
@@ -39,64 +51,72 @@ def make_bingo_card(track_names: list, unique_pages=1):
     centers_y = [center_y + row_middle for center_y in ypos[:-1]]
 
     # used in generating the random number
-    track_names_last_index = len(track_names) - 1
+    track_names_len = len(track_names)
+    track_names_last_index = track_names_len - 1
 
     # loops based on how many unique bingo cards the user wants
     for pages in range(unique_pages):
+        # create a list of numbers associated with the number of tracks so that a page doesn't have repeat entries
+        chosen_tracks_indexes = []
 
         # creates a grid based on the previous calculations
         c.grid(xpos, ypos)
 
         for y in centers_y:
             for x in centers_x:
+
                 random_index = randint(0, track_names_last_index)
+                while random_index in chosen_tracks_indexes:
+                    random_index = randint(0, track_names_last_index)
+                chosen_tracks_indexes.append(random_index)
 
                 # Get the track name
                 track_name = track_names[random_index]
 
                 # Calculate the available width within the box and initialize font size
-                available_width = column_width - 10
+                inner_box_margin = 10
+                available_width = column_width - inner_box_margin
                 font_size = 12
+                font = 'Helvetica'
 
                 # Split track_name into seperate string based on available width
                 words = track_name.split()
+
                 lines = []
                 line = words[0]
 
+                # check if the line is too long and if the length of the words list is 1
+                line_too_long = c.stringWidth(
+                    line, font, font_size) > available_width
+
                 for word in words[1:]:
-                    if c.stringWidth(line + " " + word, 'Helvetica', font_size) <= available_width:
-                        line = line + " " + word
-                    elif c.stringWidth(line, 'Helvetica', font_size) > available_width:
-                        line_len = len(line) - 1
-                        line_middle = line_len // 2
+                    new_line = line + " " + word
+                    new_line_width = c.stringWidth(
+                        new_line, font, font_size)
 
-                        lines.append(line[:line_middle])
-                        lines.append(line[line_middle:])
+                    current_line_width = c.stringWidth(
+                        line, font, font_size)
 
+                    if new_line_width <= available_width:
+                        line += (" " + word)
+                    elif current_line_width > available_width:
+                        first_half, second_half = split_word_in_half(line)
+                        lines.extend([first_half, second_half])
                         line = word
                     else:
                         lines.append(line)
                         line = word
-
-                if c.stringWidth(line, 'Helvetica', font_size) > available_width:
-                    line_len = len(line) - 1
-                    line_middle = line_len // 2
-
-                    lines.append(line[:line_middle])
-                    lines.append(line[line_middle:])
+                if line_too_long and len(words) == 1:
+                    first_half, second_half = split_word_in_half(line)
+                    lines.append(first_half)
+                    lines.append(second_half)
                 else:
                     lines.append(line)
-
-                # if c.stringWidth(line, 'Helvetica', font_size) > available_width:
-                #     line_len = len(line) - 1
-                #     line_middle = line_len // 2
-                #     lines.append(line[:line_middle])
-                #     lines.append(line[line_middle:])
 
                 adjusted_y = y + (len(lines) // 2) * font_size
                 for line in lines:
                     text_width = c.stringWidth(
-                        line, 'Helvetica', font_size)
+                        line, font, font_size)
                     adjusted_x = x - text_width / 2
                     c.drawString(adjusted_x, adjusted_y, text=line)
                     adjusted_y -= font_size
