@@ -8,7 +8,7 @@ from rest_framework.routers import DefaultRouter
 
 # URL Config
 urlpatterns = [
-    path("", views.home, name='home'),
+    path("", views.home, name='musical-bingo'),
     path("get-access-token/", views.AccessTokenViewSet.as_view(),
          name='get_access_token'),
     path("playlist/", views.PlaylistCreate.as_view(), name='playlist'),

@@ -106,32 +106,38 @@ class PlaylistCreate(View):
         request.session['status'] = status
 
     def post(self, request, *args, **kwargs):
+        uri_required_length = 22
         form = PlaylistForm(request.POST)
 
-        if form.is_valid():
-            playlist_url = form.cleaned_data['playlist_url']
-            playlist_uri = self.get_playlist_uri(playlist_url)
-            playlist = Playlist.objects.filter(
-                playlist_uri=playlist_uri).first()
-
-            if playlist:
-                status = 'Another user has already uploaded that playlist.'
-                self.fill_session_data(
-                    request, playlist, playlist_uri, status)
-                return redirect('home')
-            elif len(playlist_uri) == 22:
-                playlist = Playlist.objects.create(
-                    playlist_url=playlist_url, playlist_uri=playlist_uri)
-                status = 'Thank you for submitting your playlist!'
-                self.fill_session_data(
-                    request, playlist, playlist_uri, status)
-                return redirect('home')
-            else:
-                request.session['status'] = 'That was not a valid URL'
-                return redirect('home')
-        else:
+        if not form.is_valid():
             request.session['status'] = 'That was not a valid URL'
-            return redirect('home')
+            return redirect('musical-bingo')
+
+        playlist_url = form.cleaned_data['playlist_url']
+        response = requests.get(playlist_url)
+        playlist_url = response.url
+
+        try:
+            playlist_uri = self.get_playlist_uri(playlist_url)
+        except:
+            request.session['status'] = 'That was not a valid URL'
+            return redirect('musical-bingo')
+
+        playlist = Playlist.objects.filter(
+            playlist_uri=playlist_uri).first()
+
+        if playlist:
+            status = 'Another user has already uploaded that playlist.'
+            self.fill_session_data(
+                request, playlist, playlist_uri, status)
+            return redirect('musical-bingo')
+        elif len(playlist_uri) == uri_required_length:
+            playlist = Playlist.objects.create(
+                playlist_url=playlist_url, playlist_uri=playlist_uri)
+            status = 'Thank you for submitting your playlist!'
+            self.fill_session_data(
+                request, playlist, playlist_uri, status)
+            return redirect('musical-bingo')
 
 
 class AccessTokenViewSet(View):
@@ -190,6 +196,8 @@ class AccessTokenViewSet(View):
 class PlaylistResponseViewSet(View):
 
     def post(self, request, id):
+        print(
+            f"the csrf middleware token is: {request.POST.get('csrfmiddlewaretoken')}")
         # Set up for all playlists
         playlist = Playlist.objects.filter(id=id).first()
         cards = int(request.POST.get('cards'))
@@ -205,6 +213,12 @@ class PlaylistResponseViewSet(View):
         response = requests.get(endpoint_url, headers=headers)
         data = response.json()
         total = data.get('total')
+
+        if total < 25:
+            request.session['status'] = 'That playlist is too small. It needs to have at least 25 songs to work with musical bingo!'
+            playlist.delete()
+            return redirect('musical-bingo')
+
         items = data.get('items')
         track_names = [item.get('track')['name'] for item in items]
 
@@ -212,8 +226,7 @@ class PlaylistResponseViewSet(View):
 
         # skip everything if there is only one query to get
         if total < 100:
-            make_bingo_card(track_names=track_names, unique_pages=cards)
-            return JsonResponse(data=track_names, json_dumps_params={'indent': 4}, safe=False)
+            return make_bingo_card(track_names=track_names, unique_pages=cards)
         elif total > 1000:
             offset_interval = 200
 

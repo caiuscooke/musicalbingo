@@ -1,23 +1,7 @@
 {% extends 'playlistselector/base.html' %}
 <!-- prettier-ignore -->
 {% load custom_tags %}
-{% block content %} 
-{% with expires_at=request.session.a_t_expires_at %}
-{% if not request.session.spotify_access_token or expires_at|has_expired %}
-<script>
-  var access_token_url = "{% url 'get_access_token' %}";
-  fetch(access_token_url)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Access token retrieved:", data);
-      location.reload;
-    })
-    .catch((error) => console.error("Error retrieving access token:", error));
-</script>
-<!-- prettier-ignore -->
-{% endif %} 
-{% endwith %}
-{{ request.session.a_t_expires_at }}
+{% block content %}
 <div class="home-page">
   <h1>Welcome!</h1>
   <div class="flex-container">
@@ -43,8 +27,8 @@
   <iframe
     style="border-radius: 12px"
     src="{{ embed_url }}"
-    width="90%"
-    height="352"
+    width="60%"
+    height="400"
     frameborder="0"
     allowfullscreen=""
     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -53,10 +37,12 @@
   <!-- prettier-ignore -->
   {% endif %} 
   {% if id %}
-  <br />
-  <a class="link" href="{% url 'get_info' id=id %}"
-    >Click to get the names of the playlist tracks</a
-  >
+  <form method="post" action="{% url 'get_info' id=id %}">
+    {% csrf_token %}
+    <label for="input_cards">How many unique cards would you like?</label>
+    <input type="text" name="cards" id="input_cards" />
+    <button type="submit">Get Pdfs</button>
+  </form>
   <!-- prettier-ignore -->
   {% endif %}
 </div>

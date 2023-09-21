@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&family=Ubuntu:wght@300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto+Mono:wght@100&family=Ubuntu:wght@300&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -17,10 +17,10 @@
     <header>
       <nav class="top-nav">
         <ul class="nav-list">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About Me</a></li>
-          <li><a href="#">Works</a></li>
-          <li><a href="#">Musical Bingo!</a></li>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'about-me' %}">About Me</a></li>
+          <li><a href="{% url 'works' %}">Works</a></li>
+          <li><a href="{% url 'musical-bingo' %}">Musical Bingo!</a></li>
         </ul>
       </nav>
     </header>

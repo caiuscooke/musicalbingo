@@ -3,18 +3,10 @@
 {% load static %}
 {% block inner_content %}
 <div class="home-title">
-  <h1>Hi, I'm Caius</h1>
-  <p>nice to meet you</p>
-  <p>はじめまして</p>
+  <h1>Hi, I'm Caius<br />nice to meet you<br />はじめまして</h1>
   <img
     src="{% static 'portfolio/images/IMG-4825.PNG' %}"
     alt="Caius Cooke's profile photo"
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto+Mono:wght@100&family=Ubuntu:wght@300&display=swap"
-    rel="stylesheet"
   />
 </div>
 <div class="grid-container">
@@ -35,5 +27,26 @@
       alt="Caius Cooke at Code Wiz Durham's Grand Opening"
     />
   </div>
+</div>
+<div class="outer-box">
+  <ul class="inner-box">
+    <li class="inner-box special">Contact Information</li>
+    <li>Name:</li>
+    <li>Caius Cooke</li>
+    <li>Email:</li>
+    <li><a href="mailto:cookecaius@gmail.com">cookecaius@gmail.com</a></li>
+    <li>Number:</li>
+    <li>+1 (919) 902-3810</li>
+  </ul>
+  <form class="inner-box" action="{% url 'contact-form' %}" method="post">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required />
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required />
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="4" required></textarea>
+    <button class="special button" type="submit">Send</button>
+  </form>
 </div>
 {% endblock inner_content %}

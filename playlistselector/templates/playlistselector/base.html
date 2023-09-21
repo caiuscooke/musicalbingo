@@ -12,33 +12,31 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&family=Ubuntu:wght@300&display=swap"
       rel="stylesheet"
     />
+    <script>
+      var access_token_url = "{% url 'get_access_token' %}";
+      fetch(access_token_url)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Access token retrieved:", data);
+          location.reload;
+        })
+        .catch((error) =>
+          console.error("Error retrieving access token:", error)
+        );
+    </script>
   </head>
   <body>
     <header>
       <nav class="top-nav">
         <ul class="nav-list">
-          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'musical-bingo' %}">Home</a></li>
           <li><a href="{% url 'playlist' %}">All Playlists</a></li>
-          <li><a href="#">Contact</a></li>
-          {% if user.is_authenticated %}
-          <li>
-            <a href="#" id="dropdown-trigger">Welcome {{ user.username }}</a>
-            <div id="dropdown-menu" class="hidden">
-              <ul>
-                <li><a href="#">My Account</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-              </ul>
-            </div>
-          </li>
-          {% else %}
-          <li><a href="{% url 'login' %}">Log in</a></li>
-          {% endif %}
         </ul>
       </nav>
     </header>
     <main class="wrapper">{% block content %}{% endblock %}</main>
     <footer>
-      <p>Caius Cooke</p>
+      <a href="{% url 'home' %}">Caius Cooke</a>
     </footer>
     <script src="{% static 'playlistselector/app.js' %}"></script>
   </body>

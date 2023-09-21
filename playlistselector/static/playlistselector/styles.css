@@ -3,6 +3,7 @@ html {
 }
 body {
   font-family: "Roboto Mono", monospace;
+  font-weight: 800;
   /*  font-family: "Ubuntu", sans-serif; */
   margin: 0;
   padding: 0;
@@ -28,9 +29,6 @@ body {
 .nav-list li {
   margin-right: 15px;
 }
-.nav-list li:last-child {
-  margin-right: 15px;
-}
 .nav-list li a {
   color: white;
   text-decoration: none;
@@ -41,26 +39,9 @@ footer {
   padding: 10px;
   text-align: center;
 }
-#dropdown-menu {
-  position: absolute;
-  background-color: darkslategray;
-  border: 1px solid #ccc;
-}
-
-#dropdown-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#dropdown-menu li a {
-  color: #ccc;
-  padding: 10px;
-}
-
-#dropdown-menu li a:hover {
-  background-color: aquamarine;
-  padding: 10px;
+footer a {
+  text-decoration: none;
+  color: white;
 }
 
 .hidden {
@@ -123,11 +104,29 @@ footer {
   padding-top: 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Create 3 columns */
-  gap: 20px; /* Add spacing between grid items */
+  gap: 20px;
+}
+@media screen and (max-width: 768px) {
+  .playlist-grid {
+    display: block;
+  }
+  .grid-item iframe {
+    height: 400px;
+    width: 90%;
+  }
+  .grid-item {
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-radius: 20px;
+    border-color: #333;
+  }
 }
 .grid-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 5px;
 }
