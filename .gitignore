@@ -11,3 +11,6 @@ __pycache__/
 
 # Ignore editor-specific files
 .vscode/
+
+# ignore static
+/static/
