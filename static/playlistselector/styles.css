@@ -1,0 +1,132 @@
+html {
+  background-color: darkcyan;
+}
+body {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 800;
+  /*  font-family: "Ubuntu", sans-serif; */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.wrapper {
+  flex: 1;
+}
+.top-nav {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #333;
+  padding: 10px;
+}
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.nav-list li {
+  margin-right: 15px;
+}
+.nav-list li a {
+  color: white;
+  text-decoration: none;
+}
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Home home.html styles */
+.home-page {
+  text-align: center;
+}
+.home-page h1 {
+  margin: 50px 20px;
+  font-size: 400%;
+}
+.home-page p {
+  padding: 50px 80px;
+  font-size: 2rem;
+}
+@media (max-width: 768px) {
+  .home-page p {
+    font-size: 1rem;
+  }
+}
+.link {
+  text-decoration: none;
+  color: black;
+  padding: 10px 10px;
+}
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-container p {
+  text-align: center;
+  width: 50%;
+}
+
+/* Card Generator cardgenerator.html styles */
+.generator {
+  display: flex;
+  justify-content: center;
+}
+.generator-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+.generator-row li {
+  flex: 1 0 auto;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* playlist playlists.html styles */
+.playlist-grid {
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Create 3 columns */
+  gap: 20px;
+}
+@media screen and (max-width: 768px) {
+  .playlist-grid {
+    display: block;
+  }
+  .grid-item iframe {
+    height: 400px;
+    width: 90%;
+  }
+  .grid-item {
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-radius: 20px;
+    border-color: #333;
+  }
+}
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 5px;
+}
