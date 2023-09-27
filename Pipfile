@@ -12,7 +12,6 @@ djangorestframework = "*"
 python-decouple = "*"
 reportlab = "*"
 whitenoise = "*"
-gunicorn = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 
