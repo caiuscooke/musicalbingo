@@ -1,0 +1,137 @@
+.home-title {
+  font-family: "Roboto", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgb(42, 42, 42);
+  background: radial-gradient(
+    circle,
+    rgba(42, 42, 42, 1) 0%,
+    rgba(56, 62, 94, 1) 0%,
+    rgba(69, 55, 110, 1) 62%,
+    rgba(95, 90, 97, 1) 89%,
+    rgba(108, 98, 98, 1) 100%
+  );
+  perspective: 10px;
+}
+.home-title h1 {
+  font-size: clamp(1.5rem, 4vw, 6vw);
+  margin-bottom: 0px;
+  color: whitesmoke;
+  text-shadow: #116ba8 3px -3px 20px;
+}
+
+.home-title img {
+  width: clamp(10vw, 30vw, 40vw);
+  height: auto;
+  padding-top: 15px;
+  object-fit: cover;
+}
+
+.grid-container {
+  border-top-style: solid;
+  border-top-color: #116ba8;
+  border-width: 35px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 768px) {
+  .grid-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.grid-item {
+  font-family: "PT Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.grid-item p {
+  width: 75%;
+  text-align: left;
+  font-size: clamp(1rem, 4vw, 1.5rem);
+}
+.grid-item:last-child {
+  border: none;
+}
+
+.grid-item img {
+  box-shadow: #116ba8 3px -3px 20px;
+  display: flex;
+  justify-self: center;
+  width: 75%;
+  height: auto;
+  margin: 10px 0px;
+  border-radius: 20px;
+}
+
+.outer-box {
+  background-color: #116ba8;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 300px;
+}
+.inner-box {
+  background-color: #333;
+  color: whitesmoke;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 800;
+  border-radius: 20px;
+  margin: 10px 0;
+}
+.list-grid {
+  display: grid;
+  grid-template-columns: 0.7fr 1fr;
+  list-style: none;
+  justify-items: center;
+  text-align: center;
+  padding-inline-start: 0px;
+}
+.list-grid li {
+  padding: 10px 10px;
+}
+.list-grid li a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+.list-grid input,
+label,
+textarea {
+  align-self: center;
+  justify-self: center;
+  display: block;
+  width: 80%;
+  height: auto;
+  margin: 0.5em;
+}
+.list-grid textarea {
+  overflow: hidden;
+  resize: none;
+}
+.special {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+.button {
+  grid-column: 1 / -1;
+  justify-self: center;
+  background-color: whitesmoke;
+  color: #333;
+  margin-bottom: 5px;
+  border-style: hidden;
+}
+@media (max-width: 768px) {
+  .outer-box {
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 10px;
+  }
+  .inner-box {
+    width: clamp(250px, 80vw, 400px);
+  }
+}

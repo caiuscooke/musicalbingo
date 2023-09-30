@@ -2,6 +2,7 @@
 <!-- prettier-ignore -->
 {% load static %}
 {% block inner_content %}
+<link rel="stylesheet" href="{% static 'portfolio/homestyles.css' %}" />
 <div class="home-title">
   <h1>Hi, I'm Caius<br />nice to meet you<br />はじめまして</h1>
   <img
@@ -15,9 +16,9 @@
       I am a certified back-end developer with Python's Django, and I have
       experience with front-end development and design. I am also an educator
       for programming and computer science! Most of my professional experience
-      is from teaching children how to code, as well as some private tutoring
-      and lessons with all ages. I have a strong passion for coding and an
-      arguably stronger passion for learning new things. Please, feel free to
+      is from teaching kids age 7 to 17 how to code, as well as some private
+      tutoring and lessons with all ages. I have a strong passion for coding and
+      an arguably stronger passion for learning new things. Please, feel free to
       browse my website and get to know me a bit more!
     </p>
   </div>
@@ -29,24 +30,29 @@
   </div>
 </div>
 <div class="outer-box">
-  <ul class="inner-box">
-    <li class="inner-box special">Contact Information</li>
-    <li>Name:</li>
-    <li>Caius Cooke</li>
-    <li>Email:</li>
-    <li><a href="mailto:cookecaius@gmail.com">cookecaius@gmail.com</a></li>
-    <li>Number:</li>
-    <li>+1 (919) 902-3810</li>
-  </ul>
-  <form class="inner-box" action="{% url 'contact-form' %}" method="post">
-    {% csrf_token %}
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required />
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required />
-    <label for="message">Message:</label>
-    <textarea id="message" name="message" rows="4" required></textarea>
-    <button class="special button" type="submit">Send</button>
-  </form>
+  <div class="inner-box">
+    <div class="inner-box special"><p>Contact Information</p></div>
+    <ul class="list-grid">
+      <li>Name:</li>
+      <li>Caius Cooke</li>
+      <li>Email:</li>
+      <li><a href="mailto:cookecaius@gmail.com">cookecaius@gmail.com</a></li>
+      <li>Number:</li>
+      <li>+1 (919) 902-3810</li>
+    </ul>
+  </div>
+  <div class="inner-box">
+    <div class="inner-box special"><p>Send Me A Message!</p></div>
+    <form class="list-grid" action="{% url 'contact-form' %}" method="post">
+      {% csrf_token %}
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+      <button class="special button" type="submit">Send</button>
+    </form>
+  </div>
 </div>
 {% endblock inner_content %}
