@@ -3,6 +3,9 @@ import dj_database_url
 
 DEBUG = False
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+
 ALLOWED_HOSTS = ['caiuscooke-portfolio-prod-299a3e37b550.herokuapp.com']
 
 DATABASES = {
