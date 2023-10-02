@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: clamp(20%, 100vw, 900px);
   background: rgb(42, 42, 42);
   background: radial-gradient(
     circle,

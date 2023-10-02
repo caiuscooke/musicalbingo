@@ -4,6 +4,9 @@
 }
 .about-me {
   width: clamp(20vw, 1000px, 90vw);
+  font-family: "PT Sans", sans-serif;
+  font-weight: 100;
+  text-align: justify;
 }
 .about-me h1 {
   border-bottom-style: solid;
@@ -14,8 +17,7 @@
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
   align-self: center;
-  font-weight: 600;
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 0.9vw, 2rem);
 }
 @media (max-width: 768px) {
   .about-me-body {
@@ -35,4 +37,7 @@
 .google-anim p {
   margin-left: 10px;
   font-size: 16px;
+}
+br::after {
+  margin-top: 10px;
 }

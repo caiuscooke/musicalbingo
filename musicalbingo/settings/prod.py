@@ -2,8 +2,7 @@ from .common import *
 import dj_database_url
 
 DEBUG = False
-
-ALLOWED_HOSTS = ['caiuscooke-portfolio-prod-299a3e37b550.herokuapp.com']
+ALLOWED_HOSTS = ['caiuscooke-portfolio-prod-299a3e37b550.herokuapp.com/']
 
 DATABASES = {
     'default': dj_database_url.config()
