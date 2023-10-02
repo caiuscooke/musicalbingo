@@ -1,2 +1,141 @@
 Watching for file changes with StatReloader
 Not Found: /favicon.ico
+Not Found: /favicon.ico
+Starting new HTTPS connection (1): accounts.spotify.com:443
+https://accounts.spotify.com:443 "POST /api/token HTTP/1.1" 200 None
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+C:\Users\cooke\musicalbingo\playlistselector\pdfgenerator.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=0&limit=100 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=100&limit=100 HTTP/1.1" 200 None
+C:\Users\cooke\musicalbingo\playlistselector\pdfgenerator.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=0&limit=100 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=100&limit=100 HTTP/1.1" 200 None
+Not Found: /favicon.ico
+C:\Users\cooke\musicalbingo\playlistselector\pdfgenerator.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=0&limit=100 HTTP/1.1" 401 None
+Internal Server Error: /musicalbingo/playlist/14/get-bingo-cards/
+Traceback (most recent call last):
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\musicalbingo\playlistselector\views.py", line 173, in post
+    if total < 25:
+       ^^^^^^^^^^
+TypeError: '<' not supported between instances of 'NoneType' and 'int'
+Not Found: /favicon.ico
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=0&limit=100 HTTP/1.1" 401 None
+Internal Server Error: /musicalbingo/playlist/14/get-bingo-cards/
+Traceback (most recent call last):
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\musicalbingo\playlistselector\views.py", line 173, in post
+    if total < 25:
+       ^^^^^^^^^^
+TypeError: '<' not supported between instances of 'NoneType' and 'int'
+Starting new HTTPS connection (1): accounts.spotify.com:443
+https://accounts.spotify.com:443 "POST /api/token HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=0&limit=100 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=100&limit=100 HTTP/1.1" 200 None
+Internal Server Error: /musicalbingo/playlist/14/get-bingo-cards/
+Traceback (most recent call last):
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\.virtualenvs\musicalbingo-_zxbujUX\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\musicalbingo\playlistselector\views.py", line 197, in post
+    return make_bingo_card(track_names=track_names, unique_pages=cards)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cooke\musicalbingo\playlistselector\pdfgenerator.py", line 155, in make_bingo_card
+    c.drawString(x=(width/2), y=20,
+TypeError: Canvas.drawString() got an unexpected keyword argument 'font_size'
+C:\Users\cooke\musicalbingo\playlistselector\pdfgenerator.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=0&limit=100 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=100&limit=100 HTTP/1.1" 200 None
+Not Found: /favicon.ico
+C:\Users\cooke\musicalbingo\playlistselector\pdfgenerator.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\cooke\musicalbingo\playlistselector\pdfgenerator.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\cooke\musicalbingo\playlistselector\pdfgenerator.py changed, reloading.
+Watching for file changes with StatReloader

@@ -151,6 +151,13 @@ def make_bingo_card(track_names: list, unique_pages=1):
                     # moves the cursor down each loop to add a line break
                     adjusted_y -= font_size
 
+        line = "Made by Caius Cooke @linkedin.com/in/caius-cooke/"
+        text_width = c.stringWidth(line, font, font_size)
+        adjusted_x = (width / 2) - text_width / 2
+        # write my name at the bottom-middle
+        c.drawString(x=adjusted_x, y=20,
+                     text=line)
+
         # shows the page on the pdf based on the information stored in the c object
         c.showPage()
 

@@ -28,15 +28,28 @@ footer {
   font-weight: 700;
 }
 .nav-list {
-  position: sticky;
-  top: 0;
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
+  font-size: 1.2rem;
 }
 .nav-list li {
   margin-right: 25px;
+}
+.nav-list li:last-child {
+  margin-right: 20vw;
+}
+@media (max-width: 768px) {
+  .nav-list li,
+  .nav-list li:last-child {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  .nav-list,
+  .top-nav {
+    justify-content: space-around;
+  }
 }
 .nav-list li a {
   color: whitesmoke;

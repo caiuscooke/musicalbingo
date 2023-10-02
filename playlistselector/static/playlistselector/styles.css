@@ -29,6 +29,15 @@ body {
 .nav-list li {
   margin-right: 15px;
 }
+.nav-list li:last-child {
+  margin-right: 20vw;
+}
+@media (max-width: 768px) {
+  .nav-list li,
+  .nav-list li:last-child {
+    margin-right: 15px;
+  }
+}
 .nav-list li a {
   color: white;
   text-decoration: none;
