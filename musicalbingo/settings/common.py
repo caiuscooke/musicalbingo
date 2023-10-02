@@ -102,28 +102,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CLIENT_ID = config('CLIENT_ID')
 CLIENT_SECRET = config('CLIENT_SECRET')
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler'
-#         },
-#         'file': {
-#             'class': 'logging.FileHandler',
-#             'filename': 'general.log'
-#         },
-#         'loggers': {
-#             '': {
-#                 'handlers': ['console', 'file'],
-#                 'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO')
-#             }
-#         },
-#         'formatters': {
-#             'verbose': {
-#                 'format': '{asctime} ({levelname}) - {name} - {message}',
-#                 'style': '{'
-#             }
-#         }
-#     }
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.join.path(BASE_DIR, 'general.log'),
+        },
+    },
+    'root': {
+        'handlers': ['file'],
+        'level': 'DEBUG',  # Adjust the level as needed
+    }
+}

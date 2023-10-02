@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+import logging
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'portfolio/home.html')
+    logger = logging.getLogger(__name__)
+    try:
+        return render(request, 'portfolio/home.html')
+    except Exception as e:
+        logger.error(f"Failed with error of {str(e)}")
+        return render(request, 'portfolio/home.html')
 
 
 def about_me(request):
