@@ -3,7 +3,7 @@
   justify-content: center;
 }
 .about-me {
-  width: clamp(20vw, 1000px, 90vw);
+  width: clamp(20vw, 1200px, 90vw);
   font-family: "PT Sans", sans-serif;
   font-weight: 100;
   text-align: justify;
@@ -12,17 +12,27 @@
   border-bottom-style: solid;
   border-bottom-width: 2px;
 }
+.header-text {
+  grid-column: 1 / -2;
+  text-align: left;
+}
 .about-me-body {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   align-self: center;
-  font-size: clamp(1rem, 0.9vw, 2rem);
+  font-size: clamp(14px, 1vw, 20px);
 }
 @media (max-width: 768px) {
   .about-me-body {
     grid-template-columns: 1fr;
   }
+}
+.long-paragraph {
+  grid-column: 1 / -1;
+}
+.long-paragraph p {
+  text-indent: 1em;
 }
 .google-anim {
   background-color: #333333;
@@ -37,7 +47,4 @@
 .google-anim p {
   margin-left: 10px;
   font-size: 16px;
-}
-br::after {
-  margin-top: 10px;
 }

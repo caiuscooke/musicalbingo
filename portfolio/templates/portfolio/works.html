@@ -1,1 +1,46 @@
 {% extends 'portfolio/base.html' %}
+<!-- prettier-ignore -->
+{% load static %}
+{% block inner_content %}
+<link rel="stylesheet" href="{% static 'portfolio/worksstyles.css' %}" />
+<script src="{% static 'portfolio/script.js' %}" defer></script>
+<div class="page-title">
+  <h1>Works</h1>
+</div>
+<section aria-label="Works Photos Gallery">
+  <div class="carousel" data-carousel>
+    <button class="carousel-button prevous" data-carousel-button="prev">
+      &#8666;
+    </button>
+    <button class="carousel-button next" data-carousel-button="next">
+      &#8667;
+    </button>
+    <ul data-slides>
+      <li class="slide" data-active>
+        <img
+          src="{% static 'portfolio/images/csharp-work.png' %}"
+          alt="Caius using CSharp to teach"
+        />
+      </li>
+      <li class="slide">
+        <img
+          src="{% static 'portfolio/images/unity-work.png' %}"
+          alt="Caius's demo game for a Unity Camp"
+        />
+      </li>
+      <li class="slide">
+        <img
+          src="{% static 'portfolio/images/python-work.png' %}"
+          alt="Caius using Python to teach"
+        />
+      </li>
+      <li class="slide">
+        <img
+          src="{% static 'portfolio/images/some-lessons.jpg' %}"
+          alt="Small look at the lessons Caius planned"
+        />
+      </li>
+    </ul>
+  </div>
+</section>
+{% endblock inner_content %}

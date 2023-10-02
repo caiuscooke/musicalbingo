@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: clamp(20%, 100vw, 900px);
+  height: 100vh;
   background: rgb(42, 42, 42);
   background: radial-gradient(
     circle,
@@ -13,7 +13,11 @@
     rgba(95, 90, 97, 1) 89%,
     rgba(108, 98, 98, 1) 100%
   );
-  perspective: 10px;
+}
+@media (max-width: 1024px) {
+  .home-title {
+    height: 20%;
+  }
 }
 .home-title h1 {
   font-size: clamp(1.5rem, 4vw, 6vw);
@@ -32,7 +36,7 @@
 .grid-container {
   border-top-style: solid;
   border-top-color: #116ba8;
-  border-width: 35px;
+  border-top-width: 35px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
@@ -40,9 +44,14 @@
   .grid-container {
     display: flex;
     flex-direction: column;
+    border-top-width: 5px;
   }
 }
-
+@media (max-width: 1024px) {
+  .grid-container {
+    border-top-width: 5px;
+  }
+}
 .grid-item {
   font-family: "PT Sans", sans-serif;
   display: flex;
