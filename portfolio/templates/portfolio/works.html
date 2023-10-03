@@ -3,44 +3,119 @@
 {% load static %}
 {% block inner_content %}
 <link rel="stylesheet" href="{% static 'portfolio/worksstyles.css' %}" />
-<script src="{% static 'portfolio/script.js' %}" defer></script>
-<div class="page-title">
-  <h1>Works</h1>
-</div>
-<section aria-label="Works Photos Gallery">
-  <div class="carousel" data-carousel>
-    <button class="carousel-button prevous" data-carousel-button="prev">
-      &#8666;
-    </button>
-    <button class="carousel-button next" data-carousel-button="next">
-      &#8667;
-    </button>
-    <ul data-slides>
-      <li class="slide" data-active>
+<section class="works">
+  <div class="container">
+    <h1>Works</h1>
+    <div class="body">
+      <h2>This Website and Musical Bingo</h2>
+      <div class="work-desc">
+        <p>
+          One of my favorite projects to date is this website! If you'd like to
+          view the source code, check it out on my github. Don't forget to look
+          at my Musical Bingo site as well!
+        </p>
+        <div class="skills">
+          <h3>Skills used</h3>
+          <ul>
+            <li>Python</li>
+            <li>Django</li>
+            <li>JavaScript</li>
+            <li>HTML and CSS</li>
+            <li>VS Code</li>
+            <li>Git and Github</li>
+            <li>Heroku</li>
+          </ul>
+        </div>
+      </div>
+
+      <a href="https://github.com/caiuscooke/musicalbingo">
         <img
-          src="{% static 'portfolio/images/csharp-work.png' %}"
-          alt="Caius using CSharp to teach"
+          src="{% static 'portfolio/images/portfolio-repo.png' %}"
+          alt="Screenshot of this website's github repo"
         />
-      </li>
-      <li class="slide">
+      </a>
+
+      <h2>Unity Training</h2>
+      <div class="work-desc">
+        <p>
+          As part of my responsibilities at Code Wiz Durham, I was in charge of
+          training all new staff. A lot of the teachers we onboarded had
+          experience with C# or similar languages, but few had much knowledge of
+          Unity. I took it upon myself to create a 62 page training course for
+          those teachers. It was very well received, and helped the coaches get
+          up to speed with a well-rounded introduction to Unity.
+        </p>
+        <div class="skills">
+          <h3>Skills used</h3>
+          <ul>
+            <li>C#</li>
+            <li>Unity</li>
+            <li>Visual Studio 2022</li>
+            <li>Git and Github</li>
+            <li>Leadership</li>
+            <li>Teaching</li>
+          </ul>
+        </div>
+      </div>
+
+      <a
+        href="https://docs.google.com/document/d/12SKPhfbo7GlGrGMofGLH74Gr7qrMTDUIJTgUljaP2WA/edit?usp=sharing"
+      >
         <img
-          src="{% static 'portfolio/images/unity-work.png' %}"
-          alt="Caius's demo game for a Unity Camp"
+          src="{% static 'portfolio/images/unity-training.png' %}"
+          alt="Screenshot of the Unity training manual made by Caius Cooke"
         />
-      </li>
-      <li class="slide">
+      </a>
+
+      <h2>Python, C#, and Unity Lessons</h2>
+      <div class="work-desc span">
+        <p>
+          Of course, as the head of curriculum, I spent a great deal of time
+          creating curriculum. I spent most of my time developing lessons for my
+          Python, C# and Unity students. There are a few projects that I would
+          guide my students through creating, and you can find those at my
+          github as well.
+        </p>
+        <div class="skills">
+          <h3>Skills used</h3>
+          <ul>
+            <li>Python</li>
+            <li>Various python modules</li>
+            <li>C#</li>
+            <li>Unity</li>
+            <li>Visual Studio 2022</li>
+            <li>VS Code</li>
+            <li>Git and Github</li>
+            <li>Teaching</li>
+          </ul>
+        </div>
+      </div>
+
+      <a class="span" href="#">
         <img
           src="{% static 'portfolio/images/python-work.png' %}"
-          alt="Caius using Python to teach"
+          alt="Screenshot of the Unity training manual made by Caius Cooke"
         />
-      </li>
-      <li class="slide">
+      </a>
+      <a class="span" href="#">
+        <img
+          src="{% static 'portfolio/images/csharp-work.png' %}"
+          alt="Screenshot of the Unity training manual made by Caius Cooke"
+        />
+      </a>
+      <a class="span" href="#">
+        <img
+          src="{% static 'portfolio/images/unity-work.png' %}"
+          alt="Screenshot of the Unity training manual made by Caius Cooke"
+        />
+      </a>
+      <a class="span" href="#">
         <img
           src="{% static 'portfolio/images/some-lessons.jpg' %}"
-          alt="Small look at the lessons Caius planned"
+          alt="Screenshot of the Unity training manual made by Caius Cooke"
         />
-      </li>
-    </ul>
+      </a>
+    </div>
   </div>
 </section>
 {% endblock inner_content %}
