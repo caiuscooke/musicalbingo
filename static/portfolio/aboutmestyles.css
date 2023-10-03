@@ -1,8 +1,8 @@
-.container {
+.about-me {
   display: flex;
   justify-content: center;
 }
-.about-me {
+.container {
   width: clamp(20vw, 1200px, 90vw);
   font-family: "PT Sans", sans-serif;
   font-weight: 100;
