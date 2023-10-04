@@ -94,10 +94,10 @@
 }
 .list-grid {
   display: grid;
-  grid-template-columns: 0.7fr 1fr;
+  grid-template-columns: 0.5fr 1fr;
   list-style: none;
-  justify-items: center;
-  text-align: center;
+  justify-items: left;
+  text-align: left;
   padding-inline-start: 0px;
 }
 .list-grid li {
@@ -141,6 +141,6 @@ textarea {
     padding-bottom: 10px;
   }
   .inner-box {
-    width: clamp(250px, 80vw, 400px);
+    width: clamp(300px, 80vw, 400px);
   }
 }

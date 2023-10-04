@@ -9,7 +9,7 @@ body {
 }
 .wrapper {
   flex: 1;
-  min-height: 100vh;
+  min-height: 94vh;
 }
 footer {
   background-color: #333;

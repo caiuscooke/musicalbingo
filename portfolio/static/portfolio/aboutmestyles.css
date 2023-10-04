@@ -1,41 +1,65 @@
-.wrapper {
-  background-color: #e1eaec;
-}
 .about-me {
-  display: flex;
+  display: grid;
   justify-content: center;
-}
-.container {
-  width: clamp(20vw, 1200px, 90vw);
   font-family: "PT Sans", sans-serif;
   font-weight: 100;
-  text-align: justify;
 }
 .about-me h1 {
   border-bottom-style: solid;
   border-bottom-width: 2px;
 }
-.about-me img {
-  width: 70%;
-  height: auto;
-  border-radius: 0.3em;
-  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+.container {
+  width: clamp(20vw, 1200px, 90vw);
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+  margin: 15px 0;
 }
-.header {
-  grid-column: 2 / -1;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
+.portrait,
+.text {
+  margin-block: 0;
+  margin-inline: 0;
   border-radius: 0.3em;
   box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
-  width: 80%;
-  height: max-content;
   background-color: whitesmoke;
 }
-.header-text {
-  text-align: left;
-  margin-inline: 10px;
+.text,
+.header > h2 {
+  margin: 0 0 10px 10px;
+}
+@media (max-width: 500px) {
+  .text {
+    font-size: 14px;
+    text-align: left;
+  }
+}
+.long-paragraph {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(1, 1fr);
+  justify-items: center;
+}
+
+.long-paragraph > p {
+  padding: 10px 10px;
+  border-radius: 0.3em;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: whitesmoke;
+}
+.portrait {
+  width: 100%;
+  min-width: 150px;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0.4em;
+}
+.text,
+.long-paragraph p {
+  padding: 10px 10px;
+  text-align: justify;
 }
 .google-anim {
   background-color: #333333;
@@ -50,27 +74,4 @@
 .google-anim p {
   margin-left: 10px;
   font-size: 16px;
-}
-.about-me-body {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
-  align-self: center;
-  font-size: clamp(14px, 1vw, 20px);
-}
-@media (max-width: 768px) {
-  .about-me-body {
-    grid-template-columns: 1fr;
-  }
-}
-.long-paragraph {
-  grid-column: 1 / -1;
-  gap: 10px;
-}
-.long-paragraph p {
-  background-color: whitesmoke;
-  padding: 15px;
-  text-indent: 1em;
-  border-radius: 0.3em;
-  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
 }

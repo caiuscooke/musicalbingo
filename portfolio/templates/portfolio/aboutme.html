@@ -9,23 +9,42 @@
 />
 <link rel="stylesheet" href="{% static 'portfolio/aboutmestyles.css' %}" />
 <section class="about-me">
+  <h1>About me</h1>
   <div class="container">
-    <h1>About me</h1>
-    <div class="about-me-body">
-      <img
-        src="{% static 'portfolio/images/portrait2.jpg' %}"
-        alt="Caius Cooke's portrait"
-      />
-      <div class="header">
-        <p class="header-text">
-          From self-taught coder to coding teacher, if your development team is
-          looking for individuals who have a strong ability to motivate
-          themselves and be self-starters, then look no further.
-        </p>
-        <div class="google-anim">
-          <i style="padding-left: 10px" class="material-icons">search</i>
-          <p id="typed-elem"></p>
-        </div>
+    <img
+    class="portrait"
+      src="{% static 'portfolio/images/portrait2.jpg' %}"
+      alt="Caius Cooke's portrait"
+    />
+    <div class="header">
+      <h2>Caius J Cooke</h2>
+      <p class="text">
+        From self-taught coder to coding teacher, if your development team is
+        looking for individuals who have a strong ability to motivate themselves
+        and be self-starters, then look no further.
+      </p>
+    </div>
+    <div class="long-paragraph">
+      
+      <p>
+        As I always told my students, most professional fields are not defined
+        by what you know; instead, they are defined by your ability to accept
+        that you don't know something and proceed to figure out the answer.
+        Back in 2018, I started my first college-level computer science
+        course, which aimed to teach the fundamentals of coding with C# in
+        Unity's game development engine. I was immediately hooked, but due to
+        financial concerns and a number of other factors, I withdrew from my
+        classes and began teaching myself. I was a broke college student, so I
+        went to the library, grabbed some free resources, booted up my 2012
+        MacBook Pro, and began studying. Since then, I have gone on to teach
+        adult classes in Python, helping them get certified in their own
+        Python journey. I have also taught C# with Unity classes of my own. I
+        have a lot of passion for software development, and it's what helped
+        me excel in my position as the head of curriculum at Code Wiz Durham.
+      </p>
+      <div class="google-anim">
+        <i style="padding-left: 10px" class="material-icons">search</i>
+        <p id="typed-elem"></p>
       </div>
       <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
       <script>
@@ -45,43 +64,24 @@
           showCursor: false,
         });
       </script>
-      <div class="long-paragraph">
-        <p>
-          As I always told my students, most professional fields are not defined
-          by what you know; instead, they are defined by your ability to accept
-          that you don't know something and proceed to figure out the answer.
-          Back in 2018, I started my first college-level computer science
-          course, which aimed to teach the fundamentals of coding with C# in
-          Unity's game development engine. I was immediately hooked, but due to
-          financial concerns and a number of other factors, I withdrew from my
-          classes and began teaching myself. I was a broke college student, so I
-          went to the library, grabbed some free resources, booted up my 2012
-          MacBook Pro, and began studying. Since then, I have gone on to teach
-          adult classes in Python, helping them get certified in their own
-          Python journey. I have also taught C# with Unity classes of my own. I
-          have a lot of passion for software development, and it's what helped
-          me excel in my position as the head of curriculum at Code Wiz Durham.
-        </p>
-        <p>
-          I believe that the power is not in the knowledge someone has, but in
-          their ability to never stop trying to learn new things. My work
-          reflects that, as I am often seeking new avenues to learn new things.
-          Most recently, I got certified in backend development with Python's
-          Django and Django REST framework. I have a strong focus on making
-          responsive and efficient websites tailored to clients' needs.
-        </p>
-        <p>
-          Lastly, I consider myself to be a fast learner. In two months, I went
-          from having very little knowledge of backend development to creating
-          and deploying this website (and my musical bingo website concept) with
-          Django, PostgreSQL, Docker, and Heroku. If you made it this far, you
-          may be wondering, "Why was there Japanese on the home page?" The
-          answer is because I am fluent in Japanese after 4 years of
-          self-guided, dedicated studying.
-          <span style="font-weight: 100">私のサイトへようこそ！</span>
-        </p>
-      </div>
-    </div>
+      <p>
+        I believe that the power is not in the knowledge someone has, but in
+        their ability to never stop trying to learn new things. My work
+        reflects that, as I am often seeking new avenues to learn new things.
+        Most recently, I got certified in backend development with Python's
+        Django and Django REST framework. I have a strong focus on making
+        responsive and efficient websites tailored to clients' needs.
+      </p>
+      <p>
+        Lastly, I consider myself to be a fast learner. In two months, I went
+        from having very little knowledge of backend development to creating
+        and deploying this website (and my musical bingo website concept) with
+        Django, PostgreSQL, Docker, and Heroku. If you made it this far, you
+        may be wondering, "Why was there Japanese on the home page?" The
+        answer is because I am fluent in Japanese after 4 years of
+        self-guided, dedicated studying.
+        <span style="font-weight: 100">私のサイトへようこそ！</span>
+      </p>
   </div>
 </section>
 {% endblock inner_content %}
