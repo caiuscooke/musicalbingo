@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
   background: rgb(42, 42, 42);
   background: radial-gradient(
     circle,
@@ -27,7 +27,7 @@
 }
 
 .home-title img {
-  width: clamp(10vw, 30vw, 40vw);
+  width: clamp(10vw, 25vw, 40vw);
   height: auto;
   padding-top: 15px;
   object-fit: cover;
