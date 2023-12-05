@@ -922,3 +922,29 @@ Not Found: /favicon.ico
 Not Found: /favicon.ico
 Not Found: /favicon.ico
 Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Starting new HTTPS connection (1): accounts.spotify.com:443
+https://accounts.spotify.com:443 "POST /api/token HTTP/1.1" 200 None
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.spotify.com:443
+https://accounts.spotify.com:443 "POST /api/token HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=0&limit=100 HTTP/1.1" 200 None
+Starting new HTTPS connection (1): api.spotify.com:443
+https://api.spotify.com:443 "GET /v1/playlists/6MXJS1XyF1JzDVWJMRKnpf/tracks?offset=100&limit=100 HTTP/1.1" 200 None
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.spotify.com:443
+https://accounts.spotify.com:443 "POST /api/token HTTP/1.1" 200 None
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader

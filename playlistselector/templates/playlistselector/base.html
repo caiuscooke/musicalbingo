@@ -12,6 +12,11 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&family=Ubuntu:wght@300&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="icon"
+      href="{% static 'playlistselector/favicon.ico' %}"
+      type="image/x-icon"
+    />
     <script>
       var access_token_url = "{% url 'get_access_token' %}";
       fetch(access_token_url)
